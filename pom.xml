@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.gbessonov</groupId>
+    <artifactId>jHash-parent</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+
+    <name>jHash</name>
+    <description>A comprehensive Java library implementing popular hash functions. Provides clean, efficient APIs for cryptographic and non-cryptographic hashing with consistent interfaces and performance optimizations.</description>
+    <url>https://github.com/gbessonov/jHash</url>
+
+    <modules>
+        <module>jHash-core</module>
+        <module>jHash-benchmarks</module>
+    </modules>
+
+    <properties>
+        <project.version>0.0.1</project.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jmh.version>1.37</jmh.version>
+        <guava.version>32.1.3-jre</guava.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>5.8.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-core</artifactId>
+                <version>${jmh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-generator-annprocess</artifactId>
+                <version>${jmh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>gbessonov</id>
+            <name>Gregory Bessonov</name>
+            <url>https://github.com/gbessonov</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/gbessonov/jHash</url>
+        <connection>scm:git:git://github.com/gbessonov/jHash.git</connection>
+        <developerConnection>scm:git:ssh://github.com/gbessonov/jHash.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+</project>
