@@ -6,6 +6,7 @@ import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 import io.github.gbessonov.jhash.implementations.murmur3f.Murmur3fFactory;
 import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -35,20 +36,24 @@ public class StreamingBenchmark {
     }
 
     @Benchmark
-    public HashCode jHashStreaming() {
+    public HashCode jHashStreaming(Blackhole bh) {
         HashFunction hasher = Murmur3fFactory.create(0);
         for (byte[] chunk : chunks) {
             hasher.include(chunk);
         }
-        return hasher.hash();
+        var hash = hasher.hash();
+        bh.consume(hash);
+        return hash;
     }
 
     @Benchmark
-    public com.google.common.hash.HashCode guavaStreaming() {
+    public com.google.common.hash.HashCode guavaStreaming(Blackhole bh) {
         Hasher hasher = Hashing.murmur3_128().newHasher();
         for (byte[] chunk : chunks) {
             hasher.putBytes(chunk);
         }
-        return hasher.hash();
+        var hash = hasher.hash();
+        bh.consume(hash);
+        return hash;
     }
 }

@@ -28,12 +28,15 @@ public class HashBenchmark {
 
     @Benchmark
     public HashCode jHashMurmur3(Blackhole bh) {
-        return Murmur3fFactory.create(0).include(data).hash();
+        var hash = Murmur3fFactory.create(0).include(data).hash();
+        bh.consume(hash);
+        return hash;
     }
 
     @Benchmark
     public com.google.common.hash.HashCode guavaMurmur3(Blackhole bh) {
-        return com.google.common.hash.Hashing.murmur3_128()
-                .hashBytes(data);
+        var hash = com.google.common.hash.Hashing.murmur3_128().hashBytes(data);
+        bh.consume(hash);
+        return hash;
     }
 }
