@@ -2,12 +2,18 @@ package io.github.gbessonov.jhash.implementations.murmur3f;
 
 import io.github.gbessonov.jhash.HashCode;
 import io.github.gbessonov.jhash.HashFunction;
-import io.github.gbessonov.jhash.implementations.murmur3f.Murmur3fHashCode;
+
+import javax.annotation.concurrent.NotThreadSafe;
 
 /**
  * Fast implementation of MurmurHash3 (x64 128-bit variant),
  * optimized for streaming usage and performance.
+ *
+ *  <p><strong>Thread Safety:</strong> This class is <strong>NOT thread-safe</strong>.
+ *  Each thread must use its own instance, or external synchronization must be provided
+ *  if sharing instances across threads.
  */
+@NotThreadSafe
 class Murmur3f implements HashFunction {
 
     private static final long C1 = 0x87c37b91114253d5L;

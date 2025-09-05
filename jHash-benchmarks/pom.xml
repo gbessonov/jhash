@@ -40,6 +40,10 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.greenrobot</groupId>
+            <artifactId>essentials</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

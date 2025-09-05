@@ -24,7 +24,10 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jmh.version>1.37</jmh.version>
+        <findbug.version>3.0.2</findbug.version>
+
         <guava.version>32.1.3-jre</guava.version>
+        <greenrobot.version>3.1.0</greenrobot.version>
     </properties>
 
     <dependencyManagement>
@@ -45,9 +48,20 @@
                 <version>${jmh.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>${findbug.version}</version>
+            </dependency>
+            <!-- Competitor libraries -->
+            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.greenrobot</groupId>
+                <artifactId>essentials</artifactId>
+                <version>${greenrobot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

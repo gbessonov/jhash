@@ -12,6 +12,14 @@ public final class JHash {
         return Murmur3fFactory.create(DEFAULT_SEED);
     }
 
+    /**
+     * Fast implementation of MurmurHash3 (x64 128-bit variant),
+     * optimized for streaming usage and performance.
+     *
+     *  <p><strong>Thread Safety:</strong> This class is <strong>NOT thread-safe</strong>.
+     *  Each thread must use its own instance, or external synchronization must be provided
+     *  if sharing instances across threads.
+     */
     public static HashFunction newMurmur3_128(int seed) {
         return Murmur3fFactory.create(seed);
     }

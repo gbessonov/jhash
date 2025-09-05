@@ -1,4 +1,4 @@
-package io.github.gbessonov.jhash.murmur3f;
+package io.github.gbessonov.jhash.benchmarks.murmur3f;
 
 import io.github.gbessonov.jhash.HashCode;
 import io.github.gbessonov.jhash.HashFunction;
@@ -53,6 +53,17 @@ public class StreamingBenchmark {
             hasher.putBytes(chunk);
         }
         var hash = hasher.hash();
+        bh.consume(hash);
+        return hash;
+    }
+
+    @Benchmark
+    public byte[] greenRobotStreaming(Blackhole bh) {
+        var hasher = new org.greenrobot.essentials.hash.Murmur3F();
+        for (byte[] chunk : chunks) {
+            hasher.update(chunk);
+        }
+        var hash = hasher.getValueBytesLittleEndian();
         bh.consume(hash);
         return hash;
     }

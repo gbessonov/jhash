@@ -1,4 +1,4 @@
-package io.github.gbessonov.jhash.murmur3f;
+package io.github.gbessonov.jhash.benchmarks.murmur3f;
 
 import io.github.gbessonov.jhash.HashCode;
 import io.github.gbessonov.jhash.implementations.murmur3f.Murmur3fFactory;
@@ -35,8 +35,16 @@ public class HashBenchmark {
 
     @Benchmark
     public com.google.common.hash.HashCode guavaMurmur3(Blackhole bh) {
-        var hash = com.google.common.hash.Hashing.murmur3_128().hashBytes(data);
+        var hash = com.google.common.hash.Hashing.murmur3_128(0).hashBytes(data);
         bh.consume(hash);
         return hash;
+    }
+
+    @Benchmark
+    public void greenrobotMurmur3(Blackhole bh) {
+        var grHasher = new org.greenrobot.essentials.hash.Murmur3F();
+        grHasher.update(data);
+        var hash = grHasher.getValueBytesLittleEndian();
+        bh.consume(hash);
     }
 }
