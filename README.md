@@ -35,6 +35,8 @@ jHash delivers blazing-fast Murmur3 (128-bit) hashing with minimal allocations, 
 
 ## Usage Examples
 ### One-shot hashing
+> ⚠️ Murmur3 is not cryptographic. Do not use it for security-sensitive purposes (signatures, password hashing, etc).
+ 
 ```java
 import io.github.gbessonov.jhash.HashCode;
 import io.github.gbessonov.jhash.JHash;
