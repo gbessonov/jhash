@@ -3,6 +3,7 @@ package io.github.gbessonov.jhash.implementations.murmur3f;
 import io.github.gbessonov.jhash.HashCode;
 import io.github.gbessonov.jhash.JHash;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,6 +13,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
 
 public class Murmur3fOneShotTest {
+
+    @Test
+    public void nullInputTest() {
+        Assertions.assertThrows(NullPointerException.class, () -> JHash.murmur3_128(null));
+    }
 
     @ParameterizedTest(name = "Test case {index}: {0}")
     @MethodSource("basicHashingTestData")

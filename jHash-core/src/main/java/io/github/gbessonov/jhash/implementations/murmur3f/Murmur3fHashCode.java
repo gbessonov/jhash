@@ -15,7 +15,13 @@ import java.nio.ByteOrder;
  * The class is immutable and thread-safe.
  */
 class Murmur3fHashCode implements HashCode {
-    private static final char[] hexDigits = "0123456789abcdef".toCharArray();
+    private static final String[] HEX_PAIRS = new String[256];
+
+    static {
+        for (int i = 0; i < 256; i++) {
+            HEX_PAIRS[i] = String.format("%02x", i);
+        }
+    }
 
     private final long h1;
     private final long h2;
@@ -85,19 +91,22 @@ class Murmur3fHashCode implements HashCode {
      * @return a 32-character hexadecimal string representation of the hash
      */
     public String getValueHexString() {
-        byte[] bytes = ByteBuffer
-                .wrap(new byte[16])
-                .order(ByteOrder.LITTLE_ENDIAN)
-                .putLong(this.h1)
-                .putLong(this.h2)
-                .array();
-        StringBuilder sb = new StringBuilder(2 * bytes.length);
-
-        for(byte b : bytes) {
-            sb.append(hexDigits[b >> 4 & 15]).append(hexDigits[b & 15]);
-        }
-
-        return sb.toString();
+        return HEX_PAIRS[(int)(h1 & 0xFF)] +
+                HEX_PAIRS[(int)((h1 >>> 8) & 0xFF)] +
+                HEX_PAIRS[(int)((h1 >>> 16) & 0xFF)] +
+                HEX_PAIRS[(int)((h1 >>> 24) & 0xFF)] +
+                HEX_PAIRS[(int)((h1 >>> 32) & 0xFF)] +
+                HEX_PAIRS[(int)((h1 >>> 40) & 0xFF)] +
+                HEX_PAIRS[(int)((h1 >>> 48) & 0xFF)] +
+                HEX_PAIRS[(int)((h1 >>> 56) & 0xFF)] +
+                HEX_PAIRS[(int)(h2 & 0xFF)] +
+                HEX_PAIRS[(int)((h2 >>> 8) & 0xFF)] +
+                HEX_PAIRS[(int)((h2 >>> 16) & 0xFF)] +
+                HEX_PAIRS[(int)((h2 >>> 24) & 0xFF)] +
+                HEX_PAIRS[(int)((h2 >>> 32) & 0xFF)] +
+                HEX_PAIRS[(int)((h2 >>> 40) & 0xFF)] +
+                HEX_PAIRS[(int)((h2 >>> 48) & 0xFF)] +
+                HEX_PAIRS[(int)((h2 >>> 56) & 0xFF)];
     }
 
     @Override
