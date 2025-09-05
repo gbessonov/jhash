@@ -9,8 +9,4 @@ public class Murmur3fFactory {
     public static HashFunction create(int seed) {
         return new Murmur3f(seed);
     }
-
-    public static HashFunction create() {
-        return new Murmur3f();
-    }
 }
